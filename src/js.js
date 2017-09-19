@@ -1,11 +1,11 @@
-module.exports = function zeros(expression) {
+
+function zeros(string) {
 	var i = 0,
-		end = String(rezult(expression)).length;
-	while(String(rezult(expression))[end-i-1] == '0'){
+		end = String(rezult(string)).length;
+	while(String(rezult(string))[end-i-1] == '0'){
 		i++;
 	}
 return i;
-
 }
 
 function rezult(str) {
@@ -35,3 +35,5 @@ function factor2(k) {
 	}
 	else return 1;
 }
+// console.log(factor2(10));
+console.log(zeros('10!'));
