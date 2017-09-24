@@ -1,69 +1,39 @@
 
-function zeros(string) {
-	var i = 0,
-		rez = rezult(string);
-		while(rez%10 == 0) {
-			rez/=10;
-			i++;
-		};
-return(i);
+function zeros(expression) {
+	var count2 = 0,
+		count5 = 0,
+		count10 = 0,
+		countZeros = 0,
+		resString = '';
+		numbers = expression.split('*');
+	for(var i = 0; i < numbers.length; i++) {
+		if ( numbers[i].slice(-2) == '!!' ) {
+			resString += factor2(parseInt(numbers[i])) + ' ';
+		}
+		else if ( numbers[i].slice(-1) == '!' ) {
+			resString += factor(parseInt(numbers[i])) + ' ';
+		}
+		else return console.log('You need multiply factorials, used ! ')
+	}
+return resString;
 }
 
-function rezult(str) {
-	var arr = str.split('*'),
-		fac,
-		rez = 1;
-
-		for( i=0; i<arr.length; i++) {
-			if (arr[i].slice(-2) == '!!') {
-				fac = factor2(parseInt(arr[i]));
-			} else fac = factor(parseInt(arr[i]));
-		rez = multiply(rez, fac);
-		}
-return(rez);
+function count(num, index) {
+	var count = 0;
+	while( num % index == 0 ) {
+		count++;
+		num /= index;
+	}
+return(count);
 }
 
 function factor(n) {
-	if (n != 0) {
-		return multiply(n,factor(n-1));
-	}
+	if (n > 1 ) return n + ' ' + factor(n-1);
 	else return 1;
-
 }
 
 function factor2(k) {
-	if (k > 0) {
-		return multiply(k,factor2(k-2));
-	}
+	if (k > 1) return k + ' ' + factor2(k-2);
 	else return 1;
 }
-
-function multiply(first, second) {
-var firstLength = first.length,
-	secondLength = second.length,
-	res = [],
-	trek = 0;
-	//init array res
-	for (var i = 0; i < (firstLength + secondLength -1); i++) {
-		res[i] = 0;
-	}
-
-	//multiply first and second
-	for (var i = 0; i < firstLength; i++) {
-		for (var  j= 0; j < secondLength; j++) {
-			res[i + j] += first[i] * second[j];
-		}
-	}
-	//make trek
-	for (var i = res.length - 1; i >= 0; i--) {
-		if (i != 0) {
-			trek = Math.floor(res[i]/10);
-			res[i] %= 10;
-			res[i-1] += trek;
-		}
-	}
-
-return(res.join(''));
-}
-// console.log(factor2(10));
-console.log(zeros('90!!'));
+console.log(zeros('1!*2!*3!*4!*5!*6!*7!*8!*9!*10!'));
