@@ -1,9 +1,6 @@
 
 function zeros(expression) {
-	var count2 = 0,
-		count5 = 0,
-		count10 = 0,
-		countZeros = 0,
+	var countZeros = 0,
 		resString = '';
 		numbers = expression.split('*');
 	for(var i = 0; i < numbers.length; i++) {
@@ -15,10 +12,15 @@ function zeros(expression) {
 		}
 		else return console.log('You need multiply factorials, used ! ')
 	}
-return resString;
+	numbers = resString.split(' ');
+	for (var i = 0; i < numbers.length-1; i++) {
+		countZeros += counter(+numbers[i],5);
+	}
+return countZeros;
 }
 
-function count(num, index) {
+function counter(num, index) {
+	if (num == 0) return 0;
 	var count = 0;
 	while( num % index == 0 ) {
 		count++;
